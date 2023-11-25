@@ -1,6 +1,8 @@
 package com.example.www_doanhoaian_week06.backend.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -8,6 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "post_comments")
+@Getter
+@Setter
 public class PostComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +39,35 @@ public class PostComment {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
     private Set<PostComment> postComments = new LinkedHashSet<>();
+
+    public PostComment() {
+    }
+
+    public PostComment(Post post, PostComment parent, User user, String title, String content, boolean published, Instant createdAt, Instant publishedAt, Set<PostComment> postComments) {
+        this.post = post;
+        this.parent = parent;
+        this.user = user;
+        this.title = title;
+        this.content = content;
+        this.published = published;
+        this.createdAt = createdAt;
+        this.publishedAt = publishedAt;
+        this.postComments = postComments;
+    }
+
+    @Override
+    public String toString() {
+        return "PostComment{" +
+                "id=" + id +
+                ", post=" + post +
+                ", parent=" + parent +
+                ", user=" + user +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", published=" + published +
+                ", createdAt=" + createdAt +
+                ", publishedAt=" + publishedAt +
+                ", postComments=" + postComments +
+                '}';
+    }
 }

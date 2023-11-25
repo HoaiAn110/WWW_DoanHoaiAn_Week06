@@ -8,6 +8,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "posts")
+@NamedQueries({
+        @NamedQuery(name = "POST.FIND_ALL", query = "SELECT p FROM Post p where p.published = true")
+})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +40,9 @@ public class Post {
     @Lob
     @Column(nullable = false)
     private String content;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private Set<PostComment> postComments = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private Set<Post>posts = new LinkedHashSet<>();
 
     public Post() {
@@ -56,6 +59,10 @@ public class Post {
         this.updatedAt = updatedAt;
         this.publishedAt = publishedAt;
         this.content = content;
+    }
+
+    public Post(long id) {
+        this.id = id;
     }
 
     public long getId() {
@@ -160,5 +167,21 @@ public class Post {
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", metaTitle='" + metaTitle + '\'' +
+                ", summary='" + summary + '\'' +
+                ", published=" + published +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", publishedAt=" + publishedAt +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

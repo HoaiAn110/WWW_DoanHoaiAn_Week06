@@ -7,6 +7,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(name = "USER.FIND_BY_EMAIL", query = "SELECT u FROM User u WHERE email = :email")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,6 @@ public class User {
     private String profile;
     @OneToMany(mappedBy = "user")
     private Set<PostComment>comments;
-
     public User() {
     }
 
@@ -144,5 +146,22 @@ public class User {
 
     public void setComments(Set<PostComment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", registeredAt=" + registeredAt +
+                ", lastLogin=" + lastLogin +
+                ", intro='" + intro + '\'' +
+                ", profile='" + profile + '\'' +
+                '}';
     }
 }
