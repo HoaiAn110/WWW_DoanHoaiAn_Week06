@@ -25,9 +25,7 @@
         <div th:utext="${post.content}"></div>
 
         <div class="mb-3">
-            <th:block th:if="${user == null || user.id == 0}">
-               <a th:href="@{/login}">Login to comment</a>
-            </th:block>
+
 
             <th:block th:if="${user != null && user.id != 0}">
                 <h2>Add your comment</h2>
@@ -46,12 +44,7 @@
                 </form>
             </th:block>
         </div>
-        <th:block th:if="${user != null && user.id != 0}">
-            <div class="mb-3">
-                <h2>Repost</h2>
-                <a th:href="@{'/repost/' + ${post.id}}">Repost this post.</a>
-            </div>
-        </th:block>
+
         <div class="mb-3">
             <h2>Comments</h2>
             <ul class="list-group">
@@ -68,6 +61,7 @@
                             <p>Commented At: <span th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
                         </div>
                     </div>
+                    </br>
                 </li>
             </ul>
         </div>
