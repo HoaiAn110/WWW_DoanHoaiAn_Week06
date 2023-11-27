@@ -26,7 +26,6 @@
 
         <div class="mb-3">
 
-
             <th:block th:if="${user != null && user.id != 0}">
                 <h2>Add your comment</h2>
                 <form th:action="@{/comment/}" method="post" th:object="${comment}">
@@ -40,7 +39,7 @@
                         <label for="commentContent" class="form-label">Content:</label>
                         <textarea class="form-control" id="commentContent" name="commentContent" th:field="*{content}" rows="3" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Commit</button>
+                    <button type="submit" class="btn btn-primary">Submit Comment</button>
                 </form>
             </th:block>
         </div>
@@ -51,17 +50,16 @@
                 <li th:each="comment : ${post.postComments}" class="">
                     <div class="card">
                         <div class="card-header">
-                            <h2 th:text="${comment.title}"></h2>
-                        </div>
-                        <div class="card-body">
-                            <p th:text="${comment.content}"></p>
-                        </div>
-                        <div class="card-footer">
+                        <h2 th:text="${comment.title}"></h2>
                             <p>Author: <span th:text="${comment.user.lastName}"></span></p>
                             <p>Commented At: <span th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
                         </div>
+                        <div class="card-body">
+                            <h4>Content:</h4>
+                            <p th:text="${comment.content}"></p>
+                        </div>
+
                     </div>
-                    </br>
                 </li>
             </ul>
         </div>
