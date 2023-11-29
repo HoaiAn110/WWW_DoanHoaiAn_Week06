@@ -19,6 +19,10 @@ tạo post
 ![img_3.png](img_3.png)
 
 
+chitet post
+![image](https://github.com/Hoaiand/WWW_DoanHoaiAn_Week06/assets/127822828/554e3714-a59e-40aa-9b8c-567c06ab58e9)
+
+
 
 
 
