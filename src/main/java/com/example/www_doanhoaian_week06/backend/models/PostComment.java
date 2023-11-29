@@ -25,7 +25,7 @@ public class PostComment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    @Column(nullable = false)
+    @Column()
     private String title;
     @Lob
     @Column(nullable = false)

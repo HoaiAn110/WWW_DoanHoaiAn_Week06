@@ -24,10 +24,33 @@
 
         <div th:utext="${post.content}"></div>
 
+
+
         <div class="mb-3">
+            <h2>Comments</h2>
+            <div class="list-group">
+                <div th:each="comment : ${post.postComments}" class="">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <p>Author: <span th:text="${comment.user.lastName}"></span></p>
+                            <p><span th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
+                        </div>
+                        <div class="card-body">
+                            <h4>Comment:</h4>
+                            <p th:text="${comment.content}"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="mb-2">
 
             <th:block th:if="${user != null && user.id != 0}">
-                <h2>Add your comment</h2>
                 <form th:action="@{/comment/}" method="post" th:object="${comment}">
                     <input type="hidden" th:field="*{user}" th:value="${user}"/>
                     <input type="hidden" th:field="*{post}" th:value="${post}"/>
@@ -36,55 +59,15 @@
                         <input type="text" class="form-control" id="commentTitle" name="commentTitle" th:field="*{title}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="commentContent" class="form-label">Content:</label>
-                        <textarea class="form-control" id="commentContent" name="commentContent" th:field="*{content}" rows="3" required></textarea>
+                        <label for="commentContent" class="form-label">Comment:</label>
+                        <textarea class="form-control" id="commentContent" name="commentContent" th:field="*{content}" rows="3" required  placeholder="comment"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </form>
             </th:block>
         </div>
 
-        <div class="mb-3">
-            <h2>Comments</h2>
-            <ul class="list-group">
-                <li th:each="comment : ${post.postComments}" class="">
-                    <div class="card">
-                        <div class="card-header">
-                        <h2 th:text="${comment.title}"></h2>
-                            <p>Author: <span th:text="${comment.user.lastName}"></span></p>
-                            <p>Commented At: <span th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
-                        </div>
-                        <div class="card-body">
-                            <h4>Content:</h4>
-                            <p th:text="${comment.content}"></p>
-                        </div>
 
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <th:block th:unless="${post.posts.size() == 0}">
-            <h2>Related post</h2>
-            <th:block th:each="child : ${post.posts}">
-                <div class="col-md-4 mb-4">
-                    <a class="a" th:href="@{'/post/'+${child.id}}">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title" th:text="${child.title}"></h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text" th:text="${child.summary}"></p>
-                            </div>
-                            <div class="card-footer">
-                                <p class="card-text">Author: <small class="text-muted" th:text="${child.author.lastName}"></small></p>
-                                <p>Comments: <span th:text="${child.getPostComments().size()}"></span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </th:block>
-        </th:block>
 
     </div>
 
