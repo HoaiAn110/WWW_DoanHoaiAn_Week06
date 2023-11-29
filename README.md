@@ -19,7 +19,6 @@ tạo post
 ![img_3.png](img_3.png)
 
 
-chi tiết post
-![img_6.png](img_6.png)
+
 
 
