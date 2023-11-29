@@ -12,7 +12,7 @@ trang tạo account
 
 thông tin chi tiết user
 
-![img_2.png](img_2.png)
+![img_7.png](img_7.png)
 
 
 tạo post
